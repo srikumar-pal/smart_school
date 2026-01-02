@@ -1,0 +1,165 @@
+/* ===== GLOBAL ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    background: linear-gradient(135deg, #fdfbfb, #ebedee, #dbeafe);
+    background-size: 400% 400%;
+    animation: bgMove 15s ease infinite;
+    color: #1f2937;
+}
+
+@keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ===== NAVBAR ===== */
+.bg-gradient-primary {
+    background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* ===== HEADER ===== */
+.student-header {
+    padding: 90px 0;
+    background: linear-gradient(135deg, #667eea, #764ba2, #f7971e);
+    color: white;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+/* ===== CARDS ===== */
+.card,
+.dashboard-card {
+    border: none;
+    border-radius: 22px;
+    background: linear-gradient(
+        135deg,
+        rgba(255,255,255,0.85),
+        rgba(255,255,255,0.65)
+    );
+    backdrop-filter: blur(14px);
+    transition: all 0.4s ease;
+}
+
+.card:hover,
+.dashboard-card:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+}
+
+/* ===== ICON CIRCLES ===== */
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+/* ICON COLORS */
+.bg-blue { background: linear-gradient(45deg, #36d1dc, #5b86e5); }
+.bg-green { background: linear-gradient(45deg, #56ab2f, #a8e063); }
+.bg-orange { background: linear-gradient(45deg, #f7971e, #ffd200); }
+.bg-red { background: linear-gradient(45deg, #ff512f, #dd2476); }
+
+/* ===== BUTTONS ===== */
+.btn {
+    border-radius: 30px;
+    padding: 10px 24px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border: none;
+}
+
+.btn-success {
+    background: linear-gradient(45deg, #00b09b, #96c93d);
+    border: none;
+}
+
+.btn-danger {
+    background: linear-gradient(45deg, #ff512f, #f09819);
+    border: none;
+}
+
+.btn-warning {
+    background: linear-gradient(45deg, #f7971e, #ffd200);
+    border: none;
+    color: #222;
+}
+
+.btn:hover {
+    transform: scale(1.07);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* ===== FORMS ===== */
+.form-control,
+.form-select {
+    border-radius: 18px;
+    padding: 12px 18px;
+    border: 1px solid #d1d5db;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.25rem rgba(102,126,234,0.35);
+}
+
+/* ===== TABLE ===== */
+.table {
+    border-radius: 18px;
+    overflow: hidden;
+    background: white;
+}
+
+.table thead {
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    color: white;
+}
+
+.table tbody tr {
+    transition: 0.2s;
+}
+
+.table tbody tr:hover {
+    background: linear-gradient(90deg, #eef2ff, #fdf2f8);
+}
+
+/* ===== BADGE ===== */
+.badge {
+    padding: 8px 14px;
+    border-radius: 14px;
+    font-size: 13px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+    margin-top: 80px;
+    padding: 25px;
+    background: linear-gradient(90deg, #111827, #1f2937);
+    color: #d1d5db;
+    text-align: center;
+    border-top-left-radius: 40px;
+    border-top-right-radius: 40px;
+}

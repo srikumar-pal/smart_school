@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students List - Smart School</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-gradient-primary">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="../index.html">⬅ Smart School</a>
+        <span class="navbar-text text-white fw-bold">Students List</span>
+    </div>
+</nav>
+
+<!-- HEADER -->
+<section class="student-header">
+    <div class="container text-center text-white">
+        <h1 class="fw-bold">📋 Students Records</h1>
+        <p>View & manage all students</p>
+    </div>
+</section>
+
+<!-- TABLE SECTION -->
+<section class="container my-5">
+
+    <div class="d-flex justify-content-between mb-3">
+        <h4 class="fw-bold">All Students</h4>
+        <a href="students.html" class="btn btn-success">
+            ➕ Add New Student
+        </a>
+    </div>
+    <!-- SEARCH & FILTER -->
+<div class="row g-3 mb-3">
+    <div class="col-md-4">
+        <input type="text" id="searchInput" class="form-control"
+               placeholder="🔍 Search by name">
+    </div>
+
+    <div class="col-md-4">
+        <select id="classFilter" class="form-select">
+            <option value="">🎓 All Classes</option>
+            <option>Class 1</option>
+            <option>Class 2</option>
+            <option>Class 3</option>
+            <option>Class 4</option>
+            <option>Class 5</option>
+            <option>Class 6</option>
+            <option>Class 7</option>
+            <option>Class 8</option>
+            <option>Class 9</option>
+            <option>Class 10</option>
+            <option>Class 11</option>
+            <option>Class 12</option>
+        </select>
+    </div>
+
+    <div class="col-md-4">
+        <button class="btn btn-secondary w-100" onclick="clearFilters()">
+            ❌ Clear Filters
+        </button>
+    </div>
+</div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle shadow">
+            <thead class="table-dark text-center">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Class</th>
+                    <th>Roll</th>
+                    <th>Phone</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="studentTable">
+                <!-- JS will insert rows here -->
+            </tbody>
+
+        </table>
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    © 2026 Smart School
+</footer>
+
+<!-- ✅ SCRIPT (ALL LOGIC IN ONE PLACE) -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const table = document.getElementById("studentTable");
+    const searchInput = document.getElementById("searchInput");
+    const classFilter = document.getElementById("classFilter");
+
+    let students = JSON.parse(localStorage.getItem("students")) || [];
+
+    function renderTable(data) {
+        table.innerHTML = "";
+
+        if (data.length === 0) {
+            table.innerHTML = `
+                <tr>
+                    <td colspan="6" class="text-center text-muted py-4">
+                        😕 No students found
+                    </td>
+                </tr>
+            `;
+            return;
+        }
+
+        data.forEach((s, index) => {
+            table.innerHTML += `
+                <tr class="text-center align-middle">
+                    <td>${index + 1}</td>
+                    <td class="fw-bold">${s.name}</td>
+                    <td>
+                        <span class="badge bg-info text-dark">
+                            ${s.className}
+                        </span>
+                    </td>
+                    <td>${s.roll}</td>
+                    <td>${s.phone}</td>
+                    <td>
+                        <button class="btn btn-sm btn-warning me-1"
+                            onclick="editStudent(${index})">
+                            ✏️ Edit
+                        </button>
+                        <button class="btn btn-sm btn-danger"
+                            onclick="deleteStudent(${index})">
+                            🗑 Delete
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+    }
+
+    // INITIAL LOAD
+    renderTable(students);
+
+    // 🔍 SEARCH
+    searchInput.addEventListener("input", filterStudents);
+    classFilter.addEventListener("change", filterStudents);
+
+    function filterStudents() {
+        const searchText = searchInput.value.toLowerCase();
+        const selectedClass = classFilter.value;
+
+        const filtered = students.filter(s => {
+            const matchName = s.name.toLowerCase().includes(searchText);
+            const matchClass = selectedClass === "" || s.className === selectedClass;
+            return matchName && matchClass;
+        });
+
+        renderTable(filtered);
+    }
+
+    // ❌ CLEAR
+    window.clearFilters = function () {
+        searchInput.value = "";
+        classFilter.value = "";
+        renderTable(students);
+    };
+
+    // 🗑 DELETE
+    window.deleteStudent = function (index) {
+        if (confirm("Delete this student?")) {
+            students.splice(index, 1);
+            localStorage.setItem("students", JSON.stringify(students));
+            renderTable(students);
+        }
+    };
+
+    // ✏️ EDIT
+    window.editStudent = function (index) {
+        localStorage.setItem("editIndex", index);
+        window.location.href = "students.html";
+    };
+
+});
+</script>
+
+<script>
+(function protectPage() {
+    const role = localStorage.getItem("userRole");
+    if (!role) {
+        alert("Please login first!");
+        window.location.href = "../login.html";
+    }
+})();
+</script>
+
+</body>
+</html>

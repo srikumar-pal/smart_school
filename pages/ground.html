@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ground - Smart School</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<script>
+(function(){
+    if(!localStorage.getItem("userRole")){
+        alert("Please login first!");
+        window.location.href="../login.html";
+    }
+})();
+</script>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-gradient-primary">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="../index.html">⬅ D.N.P School</a>
+        <button onclick="logout()" class="btn btn-danger btn-sm">Logout</button>
+    </div>
+</nav>
+
+<section class="student-header">
+    <div class="container text-center text-white">
+        <h1 class="fw-bold">⚽ Ground & Sports</h1>
+        <p>Practice & Sports Schedule</p>
+    </div>
+</section>
+
+<section class="container my-5">
+    <ul class="list-group">
+        <li class="list-group-item">🏏 Cricket Practice – 4:00 PM</li>
+        <li class="list-group-item">⚽ Football Match – Saturday</li>
+        <li class="list-group-item">🏃 Morning PT – Daily</li>
+        <li class="list-group-item">🏀 Basketball Training – Friday</li>
+    </ul>
+</section>
+
+<footer class="footer">© 2026 D.N.P School</footer>
+
+<script>
+function logout(){
+    localStorage.removeItem("userRole");
+    window.location.href="../login.html";
+}
+</script>
+
+</body>
+</html>
